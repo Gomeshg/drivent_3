@@ -27,3 +27,7 @@ export async function generateValidToken(user?: User) {
 
   return token;
 }
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

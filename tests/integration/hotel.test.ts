@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 import supertest from "supertest";
-import { createEnrollmentWithAddress, createUser, createTicketType, createTicket } from "../factories";
-import { cleanDb, generateValidToken } from "../helpers";
+import { createEnrollmentWithAddress, createUser, createTicketType, createTicket, createSession } from "../factories";
+import { cleanDb, sleep } from "../helpers";
 
 beforeAll(async () => {
   await init();
@@ -45,15 +45,12 @@ describe("GET /hotels", () => {
 
   it("should respond with status 401 if the token given is expired", async () => {
     const user = await createUser();
-    const token = await generateValidToken(user);
-    // const token = jwt.sign({ userId: userWithoutSession.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: 1 });
+    await createSession(token, user.id);
+    await sleep(1000);
 
     const response = await server.get("/hotels").set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(httpStatus.UNAUTHORIZED);
   });
-});
-
-describe("GET /hotels/:hotelId", () => {
-  it("coe", () => {});
 });
