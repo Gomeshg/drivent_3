@@ -7,6 +7,20 @@ export async function createHotel(name: string) {
       name: name,
       image: faker.image.business(),
     },
+    include: {
+      Rooms: true,
+    },
+  });
+}
+
+export async function findHotelWithRoom(hotelId: number) {
+  return prisma.hotel.findUnique({
+    where: {
+      id: hotelId,
+    },
+    include: {
+      Rooms: true,
+    },
   });
 }
 

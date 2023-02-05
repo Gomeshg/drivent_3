@@ -27,7 +27,8 @@ export async function getOneHotel(req: Request, res: Response) {
   const hotelId = Number(req.params.hotelId);
 
   try {
-    return res.status(httpStatus.OK).send({});
+    const hotel = await hotelService.readOneHotel(userId, hotelId);
+    return res.status(httpStatus.OK).send(hotel);
   } catch (err) {
     if (err.name === "NotFoundError") {
       return res.sendStatus(httpStatus.NOT_FOUND);
