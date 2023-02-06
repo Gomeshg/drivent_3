@@ -1,5 +1,5 @@
-import { paymentRequiredError, notFoundError, unauthorizedError } from "@/errors";
-import { Enrollment, Ticket, TicketType, Hotel, Payment } from "@prisma/client";
+import { paymentRequiredError, notFoundError } from "@/errors";
+import { Hotel } from "@prisma/client";
 import enrollmentRepository from "@/repositories/enrollment-repository";
 import ticketRepository from "@/repositories/ticket-repository";
 import hotelRepository from "@/repositories/hotel-repository";

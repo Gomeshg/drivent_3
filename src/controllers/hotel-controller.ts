@@ -12,9 +12,6 @@ export async function getAllHotels(req: Request, res: Response) {
     if (err.name === "NotFoundError") {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
-    if (err.name === "UnauthorizedError") {
-      return res.sendStatus(httpStatus.UNAUTHORIZED);
-    }
     if (err.name === "PaymentRequiredError") {
       return res.status(httpStatus.PAYMENT_REQUIRED).send(err.message);
     }
@@ -32,9 +29,6 @@ export async function getOneHotel(req: Request, res: Response) {
   } catch (err) {
     if (err.name === "NotFoundError") {
       return res.sendStatus(httpStatus.NOT_FOUND);
-    }
-    if (err.name === "UnauthorizedError") {
-      return res.sendStatus(httpStatus.UNAUTHORIZED);
     }
     if (err.name === "PaymentRequiredError") {
       return res.status(httpStatus.PAYMENT_REQUIRED).send(err.message);

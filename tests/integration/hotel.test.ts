@@ -266,7 +266,7 @@ describe("GET /hotels/:hotelId", () => {
       expect(response.status).toBe(httpStatus.NOT_FOUND);
     });
 
-    it("should respond with status 200 with the hotel required with the rooms ", async () => {
+    it("should respond with status 200 with the hotel required and rooms ", async () => {
       const user = await createUser();
       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: fourHours });
       await createSession(token, user.id);
